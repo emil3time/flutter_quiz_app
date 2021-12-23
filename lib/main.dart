@@ -12,12 +12,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var index = 0;
+  var _index = 0;
 
-  void chooseAnswer() {
+  void _chooseAnswer() {
     setState(() {
-      index = index + 1;
-      print(index);
+      _index = _index + 1;
+      print(_index);
     });
   }
 
@@ -35,8 +35,8 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text(questions[index]),
-            ElevatedButton(onPressed: chooseAnswer, child: Text(' Answer 1')),
+            Text(questions[_index]),
+            ElevatedButton(onPressed: _chooseAnswer, child: Text(' Answer 1')),
             ElevatedButton(
                 onPressed: () => print('Answr 2'), child: Text(' Answer 1')),
             ElevatedButton(
