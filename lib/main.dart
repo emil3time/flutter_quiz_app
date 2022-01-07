@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'question.dart';
+import 'answers.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   void _chooseAnswer() {
     setState(() {
       _index = _index + 1;
+
       print(_index);
     });
   }
@@ -26,8 +28,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'what\'s your faworite song?',
-      'Do you like ice creams?',
+      {
+        'question': 'what\'s your favorite sport?',
+        'answer': ['football', 'carling', ' golf', 'basketball']
+      },
+      {
+        'question': 'what\'s your favorite color?',
+        'answer': ['blue', 'red', ' dark', 'pink']
+      },
+      {
+        'question': 'do you like ice creams?',
+        'answer': ['yes', 'no']
+      },
+      {
+        'question': 'what\'s your height (cm) ?',
+        'answer': ['close 150', ' close to 170', 'close to 190 , close to 200 ']
+      }
     ];
 
     return MaterialApp(
@@ -37,17 +53,23 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Questions(questions[_index]),
-            ElevatedButton(onPressed: _chooseAnswer, child: Text(' Answer 1')),
-            ElevatedButton(
-                onPressed: () => print('Answr 2'), child: Text(' Answer 1')),
-            ElevatedButton(
-                onPressed: () {
-                  // sdjhfuydsg
-                  ///skdashy//
-                  print('Answr3');
-                },
-                child: Text(' Answer 1')),
+            // constructor in question.dart Questions class have final field as String ,
+            // when dart take value from map I should specify type of that value or use var in class
+            Questions(questions[_index]['question'] as String),
+
+            // 1. I use questions List (this is List of 4 maps each map has key<String> nad
+            // value(object <String/List>))
+            // 2.(questions[_index]['answer'] as List) here I choose key I need and inform Dart
+            // about this key is a List
+            //3. Now I use map method - to change list to map of objects - Widgets
+            //map method take each element of List and use them on Widget - here return on my custom Answers
+            //4. Last step - convert map of Widgets into new List! but now I added my new List
+            // inside Column children List and I Can't have list inside list so I use ... syntax
+            // to extract every index from my new List of Widgets to List of
+            //
+            ...(questions[_index]['answer'] as List).map((question) {
+              return Answers(_chooseAnswer, question);
+            }).toList()
           ],
         ),
       ),
