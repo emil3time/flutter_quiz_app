@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Answers extends StatelessWidget {
-  final Function nextPageAndScoreB;
+  Function nextPageAndScoreB;
   final String answerText;
   Answers({required this.nextPageAndScoreB, required this.answerText});
 
@@ -11,9 +11,7 @@ class Answers extends StatelessWidget {
       margin: EdgeInsets.all(10),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {
-          nextPageAndScoreB();
-        },
+        onPressed: () => nextPageAndScoreB(),
         child: Text(answerText),
       ),
     );
