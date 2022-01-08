@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Questions extends StatelessWidget {
-  final String myQuestion;
+  final String singleQuestionA;
 
-  Questions(this.myQuestion);
+  Questions({required this.singleQuestionA});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class Questions extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       margin: EdgeInsets.all(15.0),
       child: Text(
-        myQuestion,
+        singleQuestionA,
         style: TextStyle(
           fontSize: 30,
         ),

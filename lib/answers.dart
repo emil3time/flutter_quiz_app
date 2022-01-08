@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Answers extends StatelessWidget {
-  Function nextIndex;
-  String answerText;
-  Answers(this.nextIndex, this.answerText);
+  final Function nextPageAndScoreB;
+  final String answerText;
+  Answers({required this.nextPageAndScoreB, required this.answerText});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class Answers extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          nextIndex();
+          nextPageAndScoreB();
         },
         child: Text(answerText),
       ),
