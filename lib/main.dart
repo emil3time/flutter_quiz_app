@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz_app/quizz.dart';
+
+import 'result.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,42 +15,34 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var index = 0;
+  var _index = 0;
+  int _score = 0;
 
-  void chooseAnswer() {
+  void _nextPageAndScore(/* int yourPreciousPoints*/) {
     setState(() {
-      index = index + 1;
-      print(index);
+      _index = _index + 1;
+      // _score = _score + yourPreciousPoints;
+      print(_index);
     });
+    if (_index < Quizz.questions.length && _index <= 2) {
+      print('I have more questions for You!');
+    } else if (_index == Quizz.questions.length - 1) {
+      print('This is last question!');
+    } else {
+      print('well done!');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'what\'s your faworite song?',
-      'Do you like ice creams?',
-    ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('This is AppBar Wigget!'),
         ),
-        body: Column(
-          children: [
-            Text(questions[index]),
-            ElevatedButton(onPressed: chooseAnswer, child: Text(' Answer 1')),
-            ElevatedButton(
-                onPressed: () => print('Answr 2'), child: Text(' Answer 1')),
-            ElevatedButton(
-                onPressed: () {
-                  // sdjhfuydsg
-                  ///skdashy//
-                  print('Answr3');
-                },
-                child: Text(' Answer 1')),
-          ],
-        ),
+        body: _index < Quizz.questions.length
+            ? Quizz(indexA: _index, nextPageAndScoreA: _nextPageAndScore)
+            : Result(),
       ),
     );
   }
