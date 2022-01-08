@@ -17,11 +17,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _index = 0;
   int _score = 0;
+  // int yourPreciousPoints = 0;
 
-  void _nextPageAndScore(/* int yourPreciousPoints*/) {
+  Function? nextPageAndScore(int yourPreciousPoints) {
     setState(() {
       _index = _index + 1;
-      // _score = _score + yourPreciousPoints;
+      _score = _score + yourPreciousPoints;
       print(_index);
     });
     if (_index < Quizz.questions.length && _index <= 2) {
@@ -30,7 +31,16 @@ class _MyAppState extends State<MyApp> {
       print('This is last question!');
     } else {
       print('well done!');
+      print(_score);
     }
+  }
+
+  Function? buttonReset() {
+    setState(() {
+      _index = 0;
+      _score = 0;
+      print(_index);
+    });
   }
 
   @override
@@ -41,8 +51,11 @@ class _MyAppState extends State<MyApp> {
           title: Text('This is AppBar Wigget!'),
         ),
         body: _index < Quizz.questions.length
-            ? Quizz(indexA: _index, nextPageAndScoreA: _nextPageAndScore)
-            : Result(),
+            ? Quizz(indexA: _index, nextPageAndScoreA: nextPageAndScore)
+            : Result(
+                scoreA: _score,
+                buttonResetA: buttonReset,
+              ),
       ),
     );
   }
